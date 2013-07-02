@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+  class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -7,7 +7,26 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-  				  :first_name, :last_name, :profile_name
+  				        :first_name, :last_name, :profile_name
 
-  # attr_accessible :title, :body
+
+  validates :first_name, presence: true
+
+
+  validates :last_name, presence: true
+
+  validates :profile_name, presence: true, 
+                            uniqueness: true, 
+                            format: {
+                              with:/\A[a-zA-Z0-9_-]+\Z/,
+                              message: 'Must be formatted correctly.'
+
+                            }
+
+  has_many :statuses
+
+  def full_name
+  	first_name + " " + last_name
+  end
 end
+

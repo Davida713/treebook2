@@ -7,3 +7,7 @@ one:
 two:
   content: MyText
   user: David
+
+three:
+  content: "Dogs are Good"
+  user: Ina
